@@ -31,7 +31,7 @@ let stack: string[] = [];
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
+  // console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
@@ -60,7 +60,7 @@ const installExtensions = async () => {
     .catch(console.log);
 };
 
-const createWindow = async (env: typeof ENV) => {
+const createWindow = async (env:  ENV) => {
   if (isDebug) {
     await installExtensions();
   }
@@ -79,7 +79,7 @@ const createWindow = async (env: typeof ENV) => {
     height: 300,
     frame: false,
     titleBarStyle: 'hidden',
-    opacity: 0.7,
+    opacity: 1,
     trafficLightPosition: { x: 15, y: 10 },
     backgroundColor: 'black',
     icon: getAssetPath('icon.png'),
@@ -138,11 +138,11 @@ app
   .whenReady()
   .then(() => {
     require('./electron').startWatching();
-    createWindow(0);
+    createWindow("MAIN_WINDOW_ID");
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
-      if (mainWindow === null) createWindow(0);
+      if (mainWindow === null) createWindow("MAIN_WINDOW_ID");
     });
   })
   .catch(console.log);

@@ -47,7 +47,7 @@ function isDiffImage(img1, img2) {
 ipcMain.handle('getClipboards', async (_, {star, search}) => {
   const take = 16;
 
-  const clipboards = prisma.clipboard.findMany({
+  const clipboards = await prisma.clipboard.findMany({
     // take: take * (cursor ? -1 : 1),
     // skip: cursor ? 1 : undefined,
     where: {
@@ -58,7 +58,7 @@ ipcMain.handle('getClipboards', async (_, {star, search}) => {
     // cursor: cursor ? { id: cursor } : undefined,
     // orderBy: cursor ? undefined : [{ id: 'desc' }],
   });
-  log('getclipboards', clipboard);
+  return clipboards
 });
 
 module.exports = clipboard;

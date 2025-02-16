@@ -1,7 +1,11 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
-import { dependencies } from '../../package.json';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const { dependencies } = require('../../package.json');
+
 
 if (dependencies) {
   const dependenciesKeys = Object.keys(dependencies);

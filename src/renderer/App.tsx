@@ -1,7 +1,7 @@
 import './App.css';
+import { useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
-import { useEffect, useState } from 'react';
 
 export default function App() {
   const [content, setContent] = useState([]);
@@ -29,7 +29,7 @@ export default function App() {
   return (
     <>
       <div className='m-4 bg-gray-500'>
-        {content?.map((clipboard, index) => {
+        {content?.map((clipboard) => {
           const { content, type, id, createdDate, blob, width, height, size } =
             clipboard;
           return (

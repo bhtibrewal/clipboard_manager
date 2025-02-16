@@ -1,8 +1,8 @@
-const path = require('path');
+import path from 'path';
 
-const rootPath = path.join(__dirname, '../..');
+const rootPath = path.join(path.resolve(), '../..');
 
-const dllPath = path.join(__dirname, '../dll');
+const dllPath = path.join(path.resolve(), '../dll');
 
 const srcPath = path.join(rootPath, 'src');
 const srcMainPath = path.join(srcPath, 'main');

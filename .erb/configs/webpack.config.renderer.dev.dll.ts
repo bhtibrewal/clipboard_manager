@@ -5,12 +5,18 @@
 import webpack from 'webpack';
 import path from 'path';
 import { merge } from 'webpack-merge';
-import baseConfig from './webpack.config.base';
-import webpackPaths from './webpack.paths';
-import { dependencies } from '../../package.json';
-import checkNodeEnv from '../scripts/check-node-env';
+import baseConfig from './webpack.config.base.ts';
+import webpackPaths from './webpack.paths.ts';
+
+import checkNodeEnv from '../scripts/check-node-env.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const { dependencies } = require('../../package.json');
+
 
 checkNodeEnv('development');
+
 
 const dist = webpackPaths.dllPath;
 
@@ -28,7 +34,7 @@ const configuration: webpack.Configuration = {
   /**
    * Use `module` from `webpack.config.renderer.dev.js`
    */
-  module: require('./webpack.config.renderer.dev').default.module,
+  module: require('./webpack.config.renderer.dev.ts').default.module,
 
   entry: {
     renderer: Object.keys(dependencies || {}),
